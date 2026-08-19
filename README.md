@@ -4,9 +4,12 @@ Pendrive Broadcaster is a portable Windows application for copying the contents 
 
 This repository distributes the compiled Windows application only. The Python source code is not included in the public release.
 
-## Download
+## Check Latest Version
+The latest Windows release is available from the
+[release page](https://github.com/rayx1/PendriveBroadcaster/releases/tag/v3.2.1).
 
-### [Download Pendrive Broadcaster v3.2.1 for Windows](https://github.com/rayx1/PendriveBroadcaster/releases/download/v3.2.1/PendriveBroadcaster-v3.2.1.exe)
+
+### 
 
 The application is portable: download the executable and run it without installation.
 
@@ -49,7 +52,7 @@ The app first attempts formatting with normal Windows permissions. If the comput
 
 ## Root-copy and AutoRun note
 
-The selected folder's contents are copied directly to the drive root. For example, `source\autorun.inf` is copied as `H:\autorun.inf`; an additional `source` folder is not created.
+The selected folder's contents are copied directly to the drive root. For example, `source\` is copied as `H:\`; an additional `source` folder is not created.
 
 Modern Windows versions may restrict or ignore AutoRun commands from removable USB storage for security. Placing `autorun.inf` at the root does not guarantee automatic execution.
 
