@@ -54,8 +54,6 @@ The app first attempts formatting with normal Windows permissions. If the comput
 
 The selected folder's contents are copied directly to the drive root. For example, `source\` is copied as `H:\`; an additional `source` folder is not created.
 
-Modern Windows versions may restrict or ignore AutoRun commands from removable USB storage for security. Placing `autorun.inf` at the root does not guarantee automatic execution.
-
 ## Windows security notice
 
 The executable is currently unsigned. Microsoft Defender SmartScreen may display a warning because the application does not yet have a commercial code-signing certificate. Download releases only from this official repository.
