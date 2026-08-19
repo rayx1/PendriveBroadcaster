@@ -50,7 +50,7 @@ Formatting permanently erases every included drive. Use expendable media for ini
 
 The app first attempts formatting with normal Windows permissions. If the computer's removable-media policy denies the operation, Windows may require the application to be reopened using **Run as administrator**.
 
-## Root-copy and AutoRun note
+## Root-copy
 
 The selected folder's contents are copied directly to the drive root. For example, `source\` is copied as `H:\`; an additional `source` folder is not created.
 
