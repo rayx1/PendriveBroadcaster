@@ -1,78 +1,76 @@
-# Pendrive Broadcaster v3.2.1
+# Pendrive Broadcaster
 
-Pendrive Broadcaster is a Windows desktop app for copying the **contents** of one source folder directly to the root of every reviewed removable USB drive. It is developed by Rashmiranjan Behera and released under the MIT License.
+Pendrive Broadcaster is a portable Windows application for copying the contents of one folder in parallel to multiple USB pendrives. It provides removable-drive identification, progress monitoring, hub-aware speed management, optional formatting, retry/resume controls, and safe eject.
 
-## What v3.2.1 includes
+This repository distributes the compiled Windows application only. The Python source code is not included in the public release.
 
-- Removable drives appear immediately while model, serial, physical hub, port, and negotiated speed are enriched in the background.
-- Source contents are copied directly to each drive root. For example, `source\autorun.inf` becomes `H:\autorun.inf`; the containing source-folder name is not created on the drive.
-- The destination field is fixed to **Root of each drive**.
-- The pre-copy review uses an Include checkbox for every pendrive. Clear it to exclude that device from copying and formatting.
-- Start remains locked for a five-second safety delay. No keyboard phrase is requested.
-- Format-first additionally requires an explicit warning checkbox acknowledging permanent erasure of every included drive.
-- Safe eject first invokes the Windows Explorer/System Eject action, then requests removal of the physical USB parent device, then uses the lock/dismount/media-eject fallback.
-- Eject errors now show the actual drive letter and meaningful fallback details instead of the literal `{drive.root.drive}` placeholder.
+## Download
 
-## Retained features
+### [Download Pendrive Broadcaster v3.2.1 for Windows](https://github.com/rayx1/PendriveBroadcaster/releases/download/v3.2.1/PendriveBroadcaster-v3.2.1.exe)
 
-- All detected pendrives are selected by default.
-- Mounted/ejected status, filesystem, free space, model, and hardware/volume serial.
-- USB controller → hub → port → pendrive topology with negotiated USB link class.
-- Adaptive Maximum is the default, with Gentle, Balanced, and immediate Maximum manual modes.
-- Per-drive progress, current file, MB/s and ETA; overall and per-hub throughput/utilization.
-- Smart update, Replace all, and Skip existing root conflict policies.
-- Validated `.usbcopy-part` resume and Retry failed drives.
-- Optional SHA-256 verification.
-- Saved presets; formatting is never saved or automatically enabled.
-- Optional exFAT, NTFS, or FAT32 format-first workflow with serial-aware revalidation.
-- Formatting is attempted with normal Windows permissions first; Administrator guidance appears only if Windows denies the operation under the PC's removable-media policy.
-- Safe eject per drive and Eject all.
-- Scrollable How-to, About, MIT License, glowing-folder icon, application splash, and boot splash.
+The application is portable: download the executable and run it without installation.
 
-## Run from source
+## Main features
 
-```powershell
-python .\pendrive_broadcaster_v32.py
+- Detects removable USB drives and selects all detected pendrives by default.
+- Displays mounted/ejected status, filesystem, capacity, model, serial number, USB hub, port path, and negotiated USB connection speed.
+- Copies the **contents** of the selected source folder directly to each included drive root.
+- Copies to multiple drives concurrently, with per-drive and overall progress bars, transfer speed, ETA, and hub-utilization information.
+- Includes Smart update, Replace all, and Skip existing conflict options.
+- Supports retry and validated resume after an interrupted copy.
+- Provides optional SHA-256 verification.
+- Supports saved copy presets. Destructive formatting is never saved or enabled automatically.
+- Optionally formats included drives as exFAT, NTFS, or FAT32 before copying.
+- Provides individual Safe eject controls and an Eject all button.
+- Includes a five-second pre-copy safety review with an Include checkbox for every drive.
+
+## System requirements
+
+- Windows 10 or Windows 11, 64-bit
+- One or more removable USB storage drives
+- No Python installation required
+
+## How to use
+
+1. Download and run `PendriveBroadcaster-v3.2.1.exe`.
+2. Choose the source folder whose contents you want to distribute.
+3. Connect the USB pendrives and wait for device identification to finish.
+4. Review the selected conflict, speed, verification, and optional format settings.
+5. Select **Copy to selected drives**.
+6. In the review screen, clear **Include** beside any drive that must be excluded.
+7. Wait for the five-second safety timer, approve the format warning when applicable, and start copying.
+8. After copying finishes, use **Safe eject** or **Eject all** before removing the drives.
+
+## Formatting warning
+
+Formatting permanently erases every included drive. Use expendable media for initial testing and verify each model, serial number, drive letter, hub, and port before approving the operation.
+
+The app first attempts formatting with normal Windows permissions. If the computer's removable-media policy denies the operation, Windows may require the application to be reopened using **Run as administrator**.
+
+## Root-copy and AutoRun note
+
+The selected folder's contents are copied directly to the drive root. For example, `source\autorun.inf` is copied as `H:\autorun.inf`; an additional `source` folder is not created.
+
+Modern Windows versions may restrict or ignore AutoRun commands from removable USB storage for security. Placing `autorun.inf` at the root does not guarantee automatic execution.
+
+## Windows security notice
+
+The executable is currently unsigned. Microsoft Defender SmartScreen may display a warning because the application does not yet have a commercial code-signing certificate. Download releases only from this official repository.
+
+SHA-256 for `PendriveBroadcaster-v3.2.1.exe`:
+
+```text
+20A1A31ADE05E266A5CE772EBA8F3A75BB4AEA4F4E615E66124FB62553571EAF
 ```
 
-Python 3.10 or newer is recommended. The app uses Python's standard library and built-in Windows management interfaces.
-
-## Build the portable Windows executable
-
-Install PyInstaller, then run:
-
-```powershell
-.\build-v321.ps1
-```
-
-The executable is written to `dist\PendriveBroadcaster-v3.2.1.exe`.
-
-## Basic workflow
-
-1. Choose a source folder. Its contents—not the containing folder—will be copied to every included drive root.
-2. Insert pendrives. They appear quickly; wait until identification and topology enrichment says Ready.
-3. Choose conflict, speed, verification, and optional format settings.
-4. Start, review model/serial/hub/port, clear Include for unwanted drives, and wait five seconds.
-5. If formatting is enabled, also select the permanent-erasure warning checkbox.
-6. Monitor progress and use Safe eject or Eject all only after completion.
-
-## Autorun note
-
-The app places `autorun.inf` at the drive root when it exists in the selected source. Modern Windows versions commonly restrict or ignore AutoRun commands on removable USB storage for security, so root placement does not guarantee automatic execution on every computer or policy configuration.
-
-## Root-copy safety
-
-- Smart update skips unchanged root paths and replaces changed files.
-- Replace all recopies every source file but does not delete unrelated files already on the drive.
-- Skip existing never overwrites an existing path.
-- Review carefully if a source filename matches an important file already at the drive root.
-- Formatting is off by default and permanently erases only the drives still marked Include.
-
-## Author and license
+## Author
 
 Developed by **Rashmiranjan Behera**  
 Website: <https://rbehera.in>  
 Email: <me@rbehera.in>
 
-MIT License. See `LICENSE-Rashmiranjan-Behera.txt`.
+## License
 
+Distributed under the MIT License. See the included license notice for details.
+
+Copyright © Rashmiranjan Behera.
